@@ -149,17 +149,27 @@ istream & operator >> (istream & in, Comentarios &c)
 	string linea;
 
 	while (continuar){
-		getline (in,linea);
+		linea.clear();
 
+		//Leo la línea
+		getline (in, linea);
+
+		//Me posiciono en el primer caracter distinto de espacio, tabulación...
 		istringstream iss (linea);
 		string s;
 		iss >> s;
 
+		//Si es '#' es un comentario, sino he leído una línea de más
+		//así que me salgo de la lectura para devolverla al flujo
 		if (s[0] == '#')
 			c += (linea);
 		else
 			continuar = false;
-	}
+
+	}//while
+
+	//Devuelvo al flujo la línea que me ha hecho salir del anterior bucle
+	in.putback('\n');	//getline elimina el delimitador
 
 	for (int i=linea.length()-1; i>=0; --i)
 		in.putback(linea[i]);
