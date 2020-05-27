@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <sstream>
 
 #include "Comentarios.h"
 
@@ -138,13 +139,37 @@ Comentarios & Comentarios :: operator += (string c)
 
 //----------------------------------------------------------------------------
 
-istream & operator >> (istream & in, Comentarios &c){}
+istream & operator >> (istream & in, Comentarios &c)
+{
+	//Reseteo
+	c.LiberaEspacio();
+
+	//Leo el espacio que debo tener y el número de comentarios
+	string linea;
+	getline (cin,linea);
+	istringstream iss (linea);
+	iss >> c.capacidad >> c.num_comentarios;
+
+	if (!iss.fail() && c.capacidad > c.num_comentarios && c.capacidad>=0 )
+	{
+		c.ReservaEspacio (c.capacidad);
+
+		//Escribimos los comentarios
+		for (int i=0; i<c.num_comentarios; ++i)
+			getline(cin,c.los_comentarios[i]);
+	}
+	else
+	{
+		c.capacidad = c.num_comentarios = 0;
+	}
+}
 
 //----------------------------------------------------------------------------
 
 ostream & operator << (ostream & out, Comentarios &c)
 {
-	out << setw(3) << c.capacidad << " " << c.num_comentarios << endl;
+	out << setw(3) << c.capacidad << " " << setw(3) << c.num_comentarios;
+	out << endl;
 
 	for (int i=0; i<c.num_comentarios; ++i)
 		out << c.los_comentarios[i] << endl;
