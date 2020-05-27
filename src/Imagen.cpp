@@ -1,4 +1,8 @@
 #include <iostream>
+#include <fstream>
+#include <stdio.h>
+#include <iomanip>
+#include <string.h>
 
 #include "Imagen.h"
 
@@ -13,23 +17,42 @@ using namespace std;
 
 //----------------------------------------------------------------------------
 
-Imagen (){}
+Imagen :: Imagen ()
+	: fils(0), cols(0), max_luminosidad(255), img(nullptr), comentarios()
+	{}
 
 //----------------------------------------------------------------------------
 
-Imagen (const Imagen & otra){}
+Imagen :: Imagen (const Imagen & otra)
+{
+	ReservaEspacio(otra.fils, otra.cols);
+	max_luminosidad = otra.max_luminosidad;
+
+	//Copio los comentarios
+	comentarios = otra.comentarios;
+
+	//Copio el contenido
+	memcpy (img, otra.img, fils*cols);
+}
 
 //----------------------------------------------------------------------------
 
-Imagen (const int f, const int c, const int valor){}
+Imagen :: Imagen (const int f, const int c, const int valor)
+	: fils(f), cols(c), max_luminosidad(valor), comentarios()
+{
+	(*this) = valor;
+}
 
 //----------------------------------------------------------------------------
 
-Imagen (string nombre_fichero){}
+Imagen :: Imagen (string nombre_fichero){}
 
 //----------------------------------------------------------------------------
 
-~Imagen (){}
+Imagen :: ~Imagen ()
+{
+	LiberaEspacio();
+}
 
 //----------------------------------------------------------------------------
 
@@ -39,31 +62,103 @@ Imagen (string nombre_fichero){}
 
 //----------------------------------------------------------------------------
 
-int GetFils() const{}
+int Imagen :: GetFils() const
+{
+	return fils;
+}
 
 //----------------------------------------------------------------------------
 
-int GetCols() const{}
+int Imagen :: GetCols() const
+{
+	return cols;
+}
 
 //----------------------------------------------------------------------------
 
-int & Pixel (const int fila, const int columna){}
+pixel & Imagen :: ValorPixel (const int fila, const int columna)
+{
+	return img[fila][columna];
+}
 
 //----------------------------------------------------------------------------
 
-int GetNumComentarios(void) const{}
+int Imagen :: GetNumComentarios(void) const
+{
+	return comentarios.GetNumComentarios();
+}
 
 //----------------------------------------------------------------------------
 
-string GetComentario (const int index) const{}
+string Imagen :: GetComentario (const int index) const
+{
+	return comentarios[index];
+}
 
 //----------------------------------------------------------------------------
 
-void ToP2 (const string &out){}
+void Imagen :: ToP2 (const string &out)
+{
+	ofstream fo(out);
+
+	if (!fo){
+		cerr << "No he podido abrir el fichero " << out;
+		exit(1);
+	}
+
+	fo << "P2" << endl;
+	fo << setw(3) << fils << " " << setw(3) << cols;
+	fo << setw(3) << max_luminosidad;
+
+	//Imprimir cabecera
+	fo << comentarios;
+
+	//Imprimir el contenido de la imagen
+	for (int i=0, contador=0; i<fils; ++i)
+		for (int j=0; j<cols; ++j,++contador){
+			fo << setw(3) << (int) img[i][j];
+			fo << ((contador%20 == 0)? "\n" : " ");
+		}
+
+	//Cerrar el fichero
+	fo.close();
+}
 
 //----------------------------------------------------------------------------
 
-void ToP5 (const string &out){}
+void Imagen :: ToP5 (const string &out)
+{
+	ofstream fo(out);
+
+	if (!fo){
+		cerr << "No he podido abrir el fichero " << out << endl;
+		exit(1);
+	}
+
+	fo << "P5" << endl;
+	fo << setw(3) << fils << " " << setw(3) << cols;
+	fo << setw(3) << max_luminosidad;
+
+	//Imprimir cabecera
+	fo << comentarios;
+
+	//Imprimir el contenido de la imagen
+		//Abrir en modo binario
+	fo.close();
+	fo.open(out, ios::binary | ios::app);
+
+	if (!fo){
+		cerr << "No he podido abrir el fichero " << out << endl;
+		exit(1);
+	}
+
+	for (int i=0; i<fils; ++i)
+		for (int j=0; j<cols; ++j)
+			fo << setw(3) << img[i][j];
+
+	//Cerrar el fichero
+	fo.close();
+}
 
 //----------------------------------------------------------------------------
 
@@ -73,14 +168,33 @@ void ToP5 (const string &out){}
 
 //----------------------------------------------------------------------------
 
-void LiberaEspacio ()
-{}
+void Imagen :: LiberaEspacio ()
+{
+	//Borrar imagen
+	for (int i=0; i<fils ; ++i)
+		delete [] img[i];
+	delete[] img;
+
+	//Borrar comentarios
+	comentarios.Limpiar();
+
+	//Actualizar los atributos
+	fils = cols = max_luminosidad = 0;
+	img = nullptr;
+}
 
 //----------------------------------------------------------------------------
 
-void ReservaEspacio (const int f, const int c)
+void Imagen :: ReservaEspacio (const int f, const int c)
 {
+	//Actualizar atributos
+	fils = f;
+	cols = c;
 
+	//Reservar espacio
+	img = new pixel* [f];
+	for (int i=0; i<f; ++i)
+		img[i] = new pixel[c];
 }
 
 //----------------------------------------------------------------------------
@@ -91,19 +205,30 @@ void ReservaEspacio (const int f, const int c)
 
 //----------------------------------------------------------------------------
 
-Imagen & operator = (const Imagen &otra){}
+Imagen & Imagen :: operator = (const Imagen &otra){}
 
 //----------------------------------------------------------------------------
 
-Imagen & operator = (const int valor){}
+Imagen & Imagen :: operator = (const int valor)
+{
+	for (int i=0; i<fils; ++i)
+		for (int j=0; j<cols; ++j)
+			img[i][j] = valor;
+
+	return *this;
+}
 
 //----------------------------------------------------------------------------
 
-Imagen & operator ! (){}
+Imagen & Imagen :: operator ! (){}
 
 //----------------------------------------------------------------------------
 
-Imagen & operator * (const Imagen & mascara){}
+Imagen & Imagen :: operator * (const Imagen & mascara){}
+
+//----------------------------------------------------------------------------
+
+istream & operator >> (istream & in, Imagen &img);
 
 //----------------------------------------------------------------------------
 

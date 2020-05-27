@@ -9,6 +9,8 @@
 
 #include <string.h>
 
+#include "Comentarios.h"
+
 using namespace std;
 
 /**
@@ -42,6 +44,11 @@ class Imagen{
 		  * @brief Contenido de la imagen
 		  */
 		pixel ** img;
+
+		/**
+		  * @brief Comentarios de la imagen
+		  */
+		Comentarios comentarios;
 
 
 		/**
@@ -81,6 +88,9 @@ class Imagen{
 		  * @param f filas
 		  * @param c columnas
 		  * @param v valor al que se inicializan los píxeles de la imagen
+		  * @pre (f>=0)
+		  * @pre (c>=0)
+		  * @pre (valor>=0)
 		  * @post Se crea una imagen de `fxc` dimensiones cuyos píxeles valen v
 		  */
 		Imagen (const int f = 0, const int c = 0, const int valor = 0);
@@ -118,7 +128,7 @@ class Imagen{
 		  * @return Devuelve una referencia al píxel apuntado por
 		  	`fila x columna`
 		  */
-		int & Pixel (const int fila, const int columna);
+		pixel & ValorPixel (const int fila, const int columna);
 
 		/**
 		  * @brief Devuelve el número de comentarios guardados
@@ -143,7 +153,6 @@ class Imagen{
 		/**
 		  * @brief Guarda la imagen como PGM P5 en el fichero de salida
 		  * @param out nombre del fichero donde se guardará la imagen
-		  * @post Se añade el comentario "Reiniciada desde 'out'"
 		  */
 		void ToP5 (const string &out);
 
@@ -186,6 +195,16 @@ class Imagen{
 		  * @return Devuelve una referencia al objeto apuntado por `this`
 	 	  */
 		Imagen & operator * (const Imagen & mascara);
+
+		/**
+		  * @brief Operador de extracción de flujo
+		  * @brief Lee una imagen de un flujo de entrada
+		  * @param in : flujo de entrada
+		  * @param c : imagen a leer
+		  * @pre El flujo contiene una imagen en formato PGM
+		  * @return Devuelve una referencia al flujo de entrada
+		  */
+		friend istream & operator >> (istream & in, Imagen &img);
 };
 
 #endif

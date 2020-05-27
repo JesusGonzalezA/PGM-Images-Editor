@@ -30,7 +30,8 @@ $(BIN)/Prueba : $(SRC)/Prueba.cpp $(OBJ)/Imagen.o $(OBJ)/Comentarios.o
 	$(CXX) -o $@ $^ -I$(INCLUDE) $(CXXFLAGS)
 
 #----------OBJETOS--------------------
-$(OBJ)/Imagen.o : $(SRC)/Imagen.cpp $(INCLUDE)/Imagen.h
+$(OBJ)/Imagen.o : $(SRC)/Imagen.cpp \
+				  $(INCLUDE)/Imagen.h $(INCLUDE)/Comentarios.h
 	$(CXX) -c -o $@ $< -I$(INCLUDE)
 
 $(OBJ)/Comentarios.o : $(SRC)/Comentarios.cpp $(INCLUDE)/Comentarios.h
