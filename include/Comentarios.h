@@ -17,14 +17,43 @@
   */
 class Comentarios{
 	private:
+
 		/**
  		  * @pre 0 <= num_comentarios
+		  * @pre num_comentarios < capacidad
 		  */
 		int num_comentarios;
+
+		/**
+		  * @brief Nos permite mantener el control de la estructura
+		  * @pre 0 <= capacidad
+		  */
+		int capacidad;
+
+		/**
+		  * @brief Cuánto aumenta la capacidad cuando queremos añadir un
+		           nuevo comentario y no tenemos espacio.
+	      */
+		static const int AUMENTO = 5;
 		/**
 		  * Almacén de comentarios
 	   	  */
 		string * los_comentarios;
+
+		/**
+		  * @brief Resetea los comentarios
+		  */
+		void LiberaEspacio ();
+
+		/**
+		  * @brief Reserva espacio para guardar comentarios
+		  * @param tam : espacio a reservar
+		  * @pre `tam` >= 0
+		  * @post `num_comentarios` = `tam`
+		  * @post `los_comentarios` tiene espacio para `tam` comentarios
+		  */
+		void ReservaEspacio (const int tam);
+
 	public:
 		/**
 		  * @brief Constructor por defecto
@@ -38,6 +67,11 @@ class Comentarios{
 		Comentarios (const Comentarios &otro);
 
 		/**
+		  * @brief Destructor
+		  */
+		~Comentarios (void);
+
+		/**
 		  * @brief Devuelve el número de comentarios guardados
 		  * @return Número de comentarios guardados
 		  */
@@ -46,15 +80,15 @@ class Comentarios{
 		/**
 		  * @brief Operador de asignación
 		  * @param otro : Comentarios a copiar
-		  * @return Devuelve una referencia al objeto apuntado por this
+		  * @return Devuelve una referencia al objeto apuntado por `this`
 	 	  */
 		Comentarios & operator = (const Comentarios &otro);
 
 		/**
-		  * @brief Operador +=
+		  * @brief Operador `+=`
 		  * @brief Añade un comentario
 		  * @param c : Comentario a añadir
-		  * @return Devuelve una referencia al objeto apuntado por this
+		  * @return Devuelve una referencia al objeto apuntado por `this`
 		  */
 		Comentarios & operator += (string c);
 
