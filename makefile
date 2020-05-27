@@ -6,7 +6,7 @@
 CXX=g++
 CXXFLAGS=
 #------------
-EXE =
+EXE = $(BIN)/Prueba
 #------------
 HOMEDIR=.
 SRC=$(HOMEDIR)/src
@@ -26,9 +26,15 @@ DIRECTORIOS= $(SRC) $(INCLUDE) $(OBJ) $(LIB) $(BIN)
 all : $(EXE)
 
 #----------EJECUTABLES----------------
-
+$(BIN)/Prueba : $(SRC)/Prueba.cpp $(OBJ)/Imagen.o $(OBJ)/Comentarios.o
+	$(CXX) -o $@ $^ -I$(INCLUDE) $(CXXFLAGS)
 
 #----------OBJETOS--------------------
+$(OBJ)/Imagen.o : $(SRC)/Imagen.cpp $(INCLUDE)/Imagen.h
+	$(CXX) -c -o $@ $< -I$(INCLUDE)
+
+$(OBJ)/Comentarios.o : $(SRC)/Comentarios.cpp $(INCLUDE)/Comentarios.h
+	$(CXX) -c -o $@ $< -I$(INCLUDE)
 
 
 #-----------------------OBJ auxiliares
@@ -42,29 +48,29 @@ mr.proper : clean clean-bins
 
 clean: clean-objs clean-libs
 
-clean-objs: clean-objetos-bibliotecas
+clean-objs:
 
 	@echo Borrando objetos
 
 	-rm $(OBJ)/*
 
 	@echo ...Borrados objetos
-	@echo 
+	@echo
 
 
-clean-libs: 
+clean-libs:
 	@echo Borrando bibliotecas
 
 	-rm $(LIB)/*
 
 	@echo ...Borradas bibliotecas
-	@echo 
+	@echo
 
-clean-bins : 
+clean-bins :
 	@echo Borrando ejecutables
 
 	-rm $(BIN)/*
-	
+
 	@echo ...Borrados ejecutables
 
 # ************ Generación de documentación ******************
