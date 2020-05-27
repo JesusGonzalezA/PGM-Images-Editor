@@ -95,6 +95,14 @@ class Comentarios{
 		/**
 		  * @brief Operador de extracción de flujo
 		  * @brief Lee comentarios de un flujo de entrada
+
+		  * @brief El formato debe ser: <br> <br>
+		   `capacidad` `num_comentarios` <br>
+		   <comentario 1> <br>
+		   <comentario 2> <br>
+		   	... <br>
+		   <comentario 'num_comentarios' > <br>
+
 		  * @param in : flujo de entrada
 		  * @param c : comentarios a leer
 		  * @return Devuelve una referencia al flujo de entrada
@@ -104,6 +112,13 @@ class Comentarios{
 		/**
 		  * @brief Operador de inserción en flujo
 		  * @brief Escribe los comentarios en un flujo de salida
+
+		  * @brief El formato será: <br> <br>
+		   `capacidad` `num_comentarios` <br>
+		   <comentario 1> <br>
+		   <comentario 2> <br>
+		   	... <br>
+		   <comentario 'num_comentarios' > <br>
 		  * @param out : flujo de salida
 		  * @param c : comentarios a escribir
 		  * @return Devuelve una referencia al flujo de salida
