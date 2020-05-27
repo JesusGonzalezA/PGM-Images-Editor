@@ -78,6 +78,11 @@ class Comentarios{
 		int GetNumComentarios (void) const;
 
 		/**
+		  * @brief Vacía los comentarios
+		  */
+		void Limpiar (void);
+
+		/**
 		  * @brief Operador de asignación
 		  * @param otro : Comentarios a copiar
 		  * @return Devuelve una referencia al objeto apuntado por `this`
@@ -91,6 +96,23 @@ class Comentarios{
 		  * @return Devuelve una referencia al objeto apuntado por `this`
 		  */
 		Comentarios & operator += (string c);
+
+		/**
+		  * @brief Inserta un comentario en la lista de comentarios
+		  * @param c El comentario a insertar
+		  * @param index Índice donde se insertará el comentario
+		  * @pre (index>=0) && (index<=num_comentarios)
+		  * @pre `c` debe empezar por `#`
+		  */
+		void Inserta (const string c, const int index);
+
+		/**
+		  * @brief Operador `[]`
+		  * @brief Permite el acceso para consulta
+		  * @param index índice del comentario
+		  * @pre (index>=0) && (index<num_comentarios)
+		  */
+		string operator [] (const int index) const;
 
 		/**
 		  * @brief Operador de extracción de flujo
@@ -121,7 +143,7 @@ class Comentarios{
 		  * @param c : comentarios a escribir
 		  * @return Devuelve una referencia al flujo de salida
 		  */
-		friend ostream & operator << (ostream & out, Comentarios &c);
+		friend ostream & operator << (ostream & out, const Comentarios &c);
 };
 
 #endif

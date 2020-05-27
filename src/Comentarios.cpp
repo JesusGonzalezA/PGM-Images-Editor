@@ -7,6 +7,8 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <stdio.h>
+#include <string.h>
 
 #include "Comentarios.h"
 
@@ -84,6 +86,56 @@ void Comentarios :: ReservaEspacio (const int tam)
 
 //----------------------------------------------------------------------------
 
+void Comentarios :: Limpiar (void)
+{
+	LiberaEspacio();
+}
+
+//----------------------------------------------------------------------------
+
+void Comentarios :: Inserta (const string c, const int index)
+{
+	if (num_comentarios == 0){
+		(*this)+=c;
+	}
+
+	else {
+		//Debo reservar espacio para más comentarios
+		if (num_comentarios == capacidad){
+			//Copio los comentarios en un auxiliar
+			string * aux = new string [capacidad];
+			swap (aux,los_comentarios);
+
+			//Reservo espacio para más comentarios
+			ReservaEspacio (capacidad + AUMENTO);
+
+			//Restauro los comentarios originales
+			for (int i=0; i<num_comentarios; ++i)
+				los_comentarios[i] = aux[i];
+
+			delete[] aux;
+		}
+
+		string * aux = new string [num_comentarios-index];
+
+		//Copiar los comentarios en el vector auxiliar
+		for (int i=0; i<(num_comentarios-index); ++i)
+			 aux [i] = los_comentarios[index + i];
+
+		//Añado el nuevo comentario
+		los_comentarios[index] = c;
+
+		//Volver a poner los comentarios
+		for (int i=1; i<=(num_comentarios-index); ++i)
+			 los_comentarios [index + i] = aux[i-1];
+
+		delete[] aux;
+		num_comentarios++;
+	}
+}
+
+//----------------------------------------------------------------------------
+
 //*****************************************************************************
 //	Sobrecarga de operadores
 //*****************************************************************************
@@ -113,7 +165,6 @@ Comentarios & Comentarios :: operator = (const Comentarios &otro)
 
 Comentarios & Comentarios :: operator += (string c)
 {
-
 	if (num_comentarios == capacidad){
 
 		//Copia de los datos
@@ -177,10 +228,17 @@ istream & operator >> (istream & in, Comentarios &c)
 
 //----------------------------------------------------------------------------
 
-ostream & operator << (ostream & out, Comentarios &c)
+string Comentarios :: operator [] (const int index) const
 {
-	for (int i=0; i<c.num_comentarios; ++i)
-		out << c.los_comentarios[i] << endl;
+	return los_comentarios[index];
+}
+
+//----------------------------------------------------------------------------
+
+ostream & operator << (ostream & out, const Comentarios &c)
+{
+	for (int i=0; i<c.GetNumComentarios() ; ++i)
+		cout << c[i] << endl;
 }
 
 //----------------------------------------------------------------------------
