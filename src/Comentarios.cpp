@@ -150,6 +150,7 @@ istream & operator >> (istream & in, Comentarios &c)
 	istringstream iss (linea);
 	iss >> c.capacidad >> c.num_comentarios;
 
+	//Si es correcto los escribo
 	if (!iss.fail() && c.capacidad > c.num_comentarios && c.capacidad>=0 )
 	{
 		c.ReservaEspacio (c.capacidad);
@@ -158,6 +159,7 @@ istream & operator >> (istream & in, Comentarios &c)
 		for (int i=0; i<c.num_comentarios; ++i)
 			getline(cin,c.los_comentarios[i]);
 	}
+	//Si es incorrecto actualizo el objeto a un estado vacío válido
 	else
 	{
 		c.capacidad = c.num_comentarios = 0;
