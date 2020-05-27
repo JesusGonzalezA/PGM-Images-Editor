@@ -144,35 +144,31 @@ istream & operator >> (istream & in, Comentarios &c)
 	//Reseteo
 	c.LiberaEspacio();
 
-	//Leo el espacio que debo tener y el número de comentarios
+	//Leo los comentarios
+	bool continuar = true;
 	string linea;
-	getline (cin,linea);
-	istringstream iss (linea);
-	iss >> c.capacidad >> c.num_comentarios;
 
-	//Si es correcto los escribo
-	if (!iss.fail() && c.capacidad > c.num_comentarios && c.capacidad>=0 )
-	{
-		c.ReservaEspacio (c.capacidad);
+	while (continuar){
+		getline (in,linea);
 
-		//Escribimos los comentarios
-		for (int i=0; i<c.num_comentarios; ++i)
-			getline(cin,c.los_comentarios[i]);
+		istringstream iss (linea);
+		string s;
+		iss >> s;
+
+		if (s[0] == '#')
+			c += (linea);
+		else
+			continuar = false;
 	}
-	//Si es incorrecto actualizo el objeto a un estado vacío válido
-	else
-	{
-		c.capacidad = c.num_comentarios = 0;
-	}
+
+	for (int i=linea.length()-1; i>=0; --i)
+		in.putback(linea[i]);
 }
 
 //----------------------------------------------------------------------------
 
 ostream & operator << (ostream & out, Comentarios &c)
 {
-	out << setw(3) << c.capacidad << " " << setw(3) << c.num_comentarios;
-	out << endl;
-
 	for (int i=0; i<c.num_comentarios; ++i)
 		out << c.los_comentarios[i] << endl;
 }
