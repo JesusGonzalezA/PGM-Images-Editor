@@ -92,6 +92,7 @@ class Imagen{
 		/**
 		  * @brief Constructor. Crea una imagen a partir de un fichero PGM.
 		  * @param nombre_fichero nombre del fichero PGM
+		  * @pre El fichero contiene una imagen en formato PGM P2 ó P5
 		  */
 		Imagen (string nombre_fichero);
 
@@ -151,6 +152,14 @@ class Imagen{
 		void ToP5 (const string &out);
 
 		/**
+		  * @brief Lee la imagen de un fichero
+		  * @param nombre_fichero Nombre del fichero donde se encuentra la
+		  		   imagen
+	      * @pre El flujo contiene una imagen en formato PGM
+		  */
+		void LeerDeFichero (const string nombre_fichero);
+
+		/**
 		  * @brief Operador de asignación
 		  * @param otro : Imagen a copiar
 		  * @post Se añade el comentario: "Reiniciada
@@ -182,6 +191,7 @@ class Imagen{
 		/**
 		  * @brief Operador de asignación
 		  * @param valor : Valor asignado a todos los píxeles
+		  * @pre `valor >= 0`
 		  * @post Se añade el comentario: "Reiniciada al valor `valor`"
 		  * @return Devuelve una referencia al objeto apuntado por `this`
 	 	  */

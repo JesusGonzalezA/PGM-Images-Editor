@@ -35,7 +35,12 @@ Imagen :: Imagen (const Imagen & otra)
 	comentarios = otra.comentarios;
 
 	//Copio el contenido
-	memcpy (img, otra.img, fils*cols);
+	for (int i=0; i<fils; ++i)
+		for (int j=0; j<cols; ++j)
+			img[i][j] = otra.img[i][j];
+
+	//Actualizo comentarios
+	comentarios+="#Creada por copia";
 }
 
 //----------------------------------------------------------------------------
@@ -43,13 +48,33 @@ Imagen :: Imagen (const Imagen & otra)
 Imagen :: Imagen (const int f, const int c, const int valor)
 	: fils(f), cols(c), max_luminosidad(valor), comentarios()
 {
-	(*this) = valor;
 	ReservaEspacio(f,c);
+	(*this) = valor;
+
+	//Comentarios
+	string comentario = (f*c==0)?
+					"#Creada vacia"
+					:
+					("#Creada " + to_string(f) + " x " + to_string(c)
+					  + " a valor " + to_string(valor));
+
+	comentarios += comentario;
 }
 
 //----------------------------------------------------------------------------
 
-Imagen :: Imagen (string nombre_fichero){}
+Imagen :: Imagen (string nombre_fichero)
+{
+	ifstream fi (nombre_fichero, ios::binary);
+
+	if (!fi)
+		cerr << "Error: No se pudo abrir el fichero " << nombre_fichero << endl;
+	else
+	{
+		fi >> (*this);
+		comentarios+=("#Creada desde " + nombre_fichero);
+	}
+}
 
 //----------------------------------------------------------------------------
 
@@ -119,7 +144,7 @@ void Imagen :: ToP2 (const string &out)
 
 
 	//Imprimir el contenido de la imagen
-	for (int i=0, contador=0; i<fils; ++i)
+	for (int i=0, contador=1; i<fils; ++i)
 		for (int j=0; j<cols; ++j,++contador){
 			fo << setw(3) << (int) img[i][j];
 			fo << ((contador%20 == 0)? "\n" : " ");
@@ -159,6 +184,19 @@ void Imagen :: ToP5 (const string &out)
 
 //----------------------------------------------------------------------------
 
+void Imagen :: LeerDeFichero (const string nombre_fichero)
+{
+	ifstream fi (nombre_fichero, ios::binary);
+
+	if (!fi)
+		cerr << "Error: No se pudo abrir el fichero " << nombre_fichero << endl;
+	else
+	{
+		LiberaEspacio();
+		fi >> (*this);
+		comentarios += ("#Reiniciada desde " + nombre_fichero);
+	}
+}
 //****************************************************************************
 //	Métodos privados
 //****************************************************************************
@@ -202,17 +240,40 @@ void Imagen :: ReservaEspacio (const int f, const int c)
 
 //----------------------------------------------------------------------------
 
-pixel & Imagen :: operator () (const int f, const int c) {
+pixel & Imagen :: operator () (const int f, const int c)
+{
 	return ValorPixel(f,c);
 }
 
-pixel & Imagen :: operator () (const int f, const int c) const{
+pixel & Imagen :: operator () (const int f, const int c) const
+{
 	return ValorPixel(f,c);
 }
 
 //----------------------------------------------------------------------------
 
-Imagen & Imagen :: operator = (const Imagen &otra){}
+Imagen & Imagen :: operator = (const Imagen &otra)
+{
+	if (this != &otra){
+		LiberaEspacio();
+
+		//Actualizo los atributos
+		ReservaEspacio(otra.fils,otra.cols);
+		max_luminosidad = otra.max_luminosidad;
+
+		//Copio los comentarios
+		comentarios = otra.comentarios;
+
+		//Copio el contenido de la imagen
+		for (int i=0; i<fils; i++)
+			memcpy (img[i],otra.img[i],cols);
+
+		//Añado comentario
+		comentarios+="#Reiniciada desde otro objeto de la clase.";
+	}
+
+	return *this;
+}
 
 //----------------------------------------------------------------------------
 
@@ -222,16 +283,22 @@ Imagen & Imagen :: operator = (const int valor)
 		for (int j=0; j<cols; ++j)
 			img[i][j] = valor;
 
+	if (valor>max_luminosidad) max_luminosidad = valor;
+
+	comentarios+=("#Reiniciada al valor " + to_string(valor));
+
 	return *this;
 }
 
 //----------------------------------------------------------------------------
 
-Imagen & Imagen :: operator ! (){}
+Imagen & Imagen :: operator ! ()
+{}
 
 //----------------------------------------------------------------------------
 
-Imagen & Imagen :: operator * (const Imagen & mascara){}
+Imagen & Imagen :: operator * (const Imagen & mascara)
+{}
 
 //----------------------------------------------------------------------------
 
