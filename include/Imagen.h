@@ -18,6 +18,10 @@ using namespace std;
   * @brief Abstrae el concepto de Imagen para su procesamiento
   */
 
+/**
+  * @typedef pixel
+  * @brief equivalente a byte
+  */
 typedef unsigned char pixel;
 
 class Imagen{
@@ -81,7 +85,7 @@ class Imagen{
 		  * @brief Constructor. Crea una imagen rectangular vacía.
 		  * @param f filas
 		  * @param c columnas
-		  * @param v valor al que se inicializan los píxeles de la imagen
+		  * @param valor valor al que se inicializan los píxeles de la imagen
 		  * @pre (f>=0)
 		  * @pre (c>=0)
 		  * @pre (valor>=0)
@@ -161,7 +165,7 @@ class Imagen{
 
 		/**
 		  * @brief Operador de asignación
-		  * @param otro : Imagen a copiar
+		  * @param otra : Imagen a copiar
 		  * @post Se añade el comentario: "Reiniciada
 		          desde otro objeto de la clase"
 		  * @return Devuelve una referencia al objeto apuntado por `this`
@@ -224,12 +228,12 @@ class Imagen{
 		  * @brief Operador de extracción de flujo
 		  * @brief Lee una imagen de un flujo de entrada
 		  * @param in : flujo de entrada
-		  * @param c : imagen a leer
+		  * @param i : imagen a leer
 		  * @pre El flujo contiene una imagen en formato PGM
 		  * @pre El flujo debe estar abierto en modo binario
 		  * @return Devuelve una referencia al flujo de entrada
 		  */
-		friend istream & operator >> (istream & in, Imagen &img);
+		friend istream & operator >> (istream & in, Imagen & i);
 };
 
 #endif
