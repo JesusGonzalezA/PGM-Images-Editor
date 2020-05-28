@@ -15,7 +15,7 @@ using namespace std;
 
 /**
   * @class Imagen
-  *
+  * @brief Abstrae el concepto de Imagen para su procesamiento
   */
 
 typedef unsigned char pixel;

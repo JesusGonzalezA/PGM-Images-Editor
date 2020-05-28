@@ -1,3 +1,9 @@
+/**
+  * @file Imagen.cpp
+  * @brief Implementación de la clase `Imagen`
+  *
+  */
+
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
