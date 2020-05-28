@@ -212,7 +212,10 @@ istream & operator >> (istream & in, Comentarios &c)
 
 		//Si es '#' es un comentario, sino he leído una línea de más
 		//así que me salgo de la lectura para devolverla al flujo
-		if (s[0] == '#')
+		if (s.length() == 0 || !in.good())
+			continuar = false;
+
+		if(s[0] == '#' && continuar)
 			c += (linea);
 		else
 			continuar = false;
@@ -224,6 +227,7 @@ istream & operator >> (istream & in, Comentarios &c)
 
 	for (int i=linea.length()-1; i>=0; --i)
 		in.putback(linea[i]);
+
 }
 
 //----------------------------------------------------------------------------
@@ -237,8 +241,8 @@ string Comentarios :: operator [] (const int index) const
 
 ostream & operator << (ostream & out, const Comentarios &c)
 {
-	for (int i=0; i<c.GetNumComentarios() ; ++i)
-		cout << c[i] << endl;
+	for (int i=0; i<c.num_comentarios; ++i)
+		cout << c.los_comentarios[i] << endl;
 }
 
 //----------------------------------------------------------------------------
