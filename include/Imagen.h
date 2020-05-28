@@ -72,12 +72,6 @@ class Imagen{
 	public:
 
 		/**
-		  * @brief Constructor por defecto
-		  * @brief Se inicializa como una imagen vacía (0x0)
-		  */
-		Imagen ();
-
-		/**
 		  * @brief Constructor por copia
 		  * @param otra Imagen a copiar
 		  */
@@ -128,7 +122,7 @@ class Imagen{
 		  * @return Devuelve una referencia al píxel apuntado por
 		  	`fila x columna`
 		  */
-		pixel & ValorPixel (const int fila, const int columna);
+		pixel & ValorPixel (const int fila, const int columna) const;
 
 		/**
 		  * @brief Devuelve el número de comentarios guardados
@@ -164,6 +158,26 @@ class Imagen{
 		  * @return Devuelve una referencia al objeto apuntado por `this`
 	 	  */
 		Imagen & operator = (const Imagen &otra);
+
+		/**
+		  * @brief Operador de acceso
+		  * @param f : fila
+		  * @param c : columna
+		  * @pre `f >= 0` y `f<fils`
+		  * @pre `c >= 0` y `c<cols`
+		  * @return Devuelve una copia del valor del pixel indicado
+	 	  */
+		pixel & operator () (const int f, const int c) const;
+
+		/**
+		  * @brief Operador de acceso
+		  * @param f : fila
+		  * @param c : columna
+		  * @pre `f >= 0` y `f<fils`
+		  * @pre `c >= 0` y `c<cols`
+		  * @return Devuelve una referencia al pixel indicado
+	 	  */
+		pixel & operator () (const int f, const int c);
 
 		/**
 		  * @brief Operador de asignación
@@ -202,6 +216,7 @@ class Imagen{
 		  * @param in : flujo de entrada
 		  * @param c : imagen a leer
 		  * @pre El flujo contiene una imagen en formato PGM
+		  * @pre El flujo debe estar abierto en modo binario
 		  * @return Devuelve una referencia al flujo de entrada
 		  */
 		friend istream & operator >> (istream & in, Imagen &img);

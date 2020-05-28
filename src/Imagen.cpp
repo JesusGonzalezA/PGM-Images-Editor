@@ -17,9 +17,6 @@ using namespace std;
 
 //----------------------------------------------------------------------------
 
-Imagen :: Imagen ()
-	: fils(0), cols(0), max_luminosidad(255), img(nullptr), comentarios()
-	{}
 
 //----------------------------------------------------------------------------
 
@@ -41,6 +38,7 @@ Imagen :: Imagen (const int f, const int c, const int valor)
 	: fils(f), cols(c), max_luminosidad(valor), comentarios()
 {
 	(*this) = valor;
+	ReservaEspacio(f,c);
 }
 
 //----------------------------------------------------------------------------
@@ -76,7 +74,7 @@ int Imagen :: GetCols() const
 
 //----------------------------------------------------------------------------
 
-pixel & Imagen :: ValorPixel (const int fila, const int columna)
+pixel & Imagen :: ValorPixel (const int fila, const int columna) const
 {
 	return img[fila][columna];
 }
@@ -106,12 +104,13 @@ void Imagen :: ToP2 (const string &out)
 		exit(1);
 	}
 
-	fo << "P2" << endl;
-	fo << setw(3) << fils << " " << setw(3) << cols;
-	fo << setw(3) << max_luminosidad;
-
 	//Imprimir cabecera
+	fo << "P2" << endl;
 	fo << comentarios;
+	fo << setw(3) << fils << " " << setw(3) << cols << endl;
+	fo << setw(3) << max_luminosidad << endl;
+
+
 
 	//Imprimir el contenido de la imagen
 	for (int i=0, contador=0; i<fils; ++i)
@@ -119,6 +118,7 @@ void Imagen :: ToP2 (const string &out)
 			fo << setw(3) << (int) img[i][j];
 			fo << ((contador%20 == 0)? "\n" : " ");
 		}
+	fo << endl;
 
 	//Cerrar el fichero
 	fo.close();
@@ -128,33 +128,24 @@ void Imagen :: ToP2 (const string &out)
 
 void Imagen :: ToP5 (const string &out)
 {
-	ofstream fo(out);
+	ofstream fo(out, ios::binary);
 
 	if (!fo){
 		cerr << "No he podido abrir el fichero " << out << endl;
 		exit(1);
 	}
-
-	fo << "P5" << endl;
-	fo << setw(3) << fils << " " << setw(3) << cols;
-	fo << setw(3) << max_luminosidad;
 
 	//Imprimir cabecera
+	fo << "P5" << endl;
 	fo << comentarios;
+	fo << setw(3) << fils << " " << setw(3) << cols << endl;
+	fo << setw(3) << max_luminosidad << endl;
+
 
 	//Imprimir el contenido de la imagen
-		//Abrir en modo binario
-	fo.close();
-	fo.open(out, ios::binary | ios::app);
-
-	if (!fo){
-		cerr << "No he podido abrir el fichero " << out << endl;
-		exit(1);
-	}
-
 	for (int i=0; i<fils; ++i)
-		for (int j=0; j<cols; ++j)
-			fo << setw(3) << img[i][j];
+		fo.write ((const char *) img[i],cols);
+	fo << endl;
 
 	//Cerrar el fichero
 	fo.close();
@@ -205,6 +196,16 @@ void Imagen :: ReservaEspacio (const int f, const int c)
 
 //----------------------------------------------------------------------------
 
+pixel & Imagen :: operator () (const int f, const int c) {
+	return ValorPixel(f,c);
+}
+
+pixel & Imagen :: operator () (const int f, const int c) const{
+	return ValorPixel(f,c);
+}
+
+//----------------------------------------------------------------------------
+
 Imagen & Imagen :: operator = (const Imagen &otra){}
 
 //----------------------------------------------------------------------------
@@ -228,7 +229,62 @@ Imagen & Imagen :: operator * (const Imagen & mascara){}
 
 //----------------------------------------------------------------------------
 
-istream & operator >> (istream & in, Imagen &img);
+istream & operator >> (istream & in, Imagen &i)
+{
+	string tipo;
+
+	//Leo tipo
+	getline (in,tipo);
+	if ((tipo != "P2") && (tipo != "P5"))
+	{
+		cerr << "Error al leer la imagen. Debe ser de tipo P2 ó P5";
+	}
+
+	else{
+		//Leo comentarios
+		in >> i.comentarios;
+		//Leo las dimensiones de la Imagen
+		int f, c;
+		in >> f >> c;
+
+		if (!in.fail() && f>0 && c>0)
+		{
+			i.ReservaEspacio(f,c);
+
+			//Leo el máximo valor de lumninosidad
+			in >> i.max_luminosidad;
+
+			//Leo el contenido de la imagen
+			if (tipo == "P2"){
+				int num;
+				for (int z=0; z<f; ++z)
+					for (int j=0; j<c; ++j){
+						in >> num;
+						i(z,j) = (pixel) num;
+					}
+			}
+			else //P5
+			{
+				int num_pixels = f*c;
+				pixel * image = new pixel [num_pixels];
+				in.read (reinterpret_cast<char*> (image), num_pixels);
+
+				if (in.gcount() != num_pixels) {
+					cerr << "Error: No se pudo leer correctamente la imagen."
+					     << endl;
+					i.LiberaEspacio();
+				}
+
+				for (int z=0, contador = 0; z<f; ++z)
+					for (int j = 0; j<c; ++j, contador++)
+						i(z,j) = image[contador];
+			}
+
+		}//Lectura imagen
+
+	}//Lectura imagen+comentarios
+
+}//FIN
 
 //----------------------------------------------------------------------------
 

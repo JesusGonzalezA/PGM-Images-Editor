@@ -242,7 +242,7 @@ string Comentarios :: operator [] (const int index) const
 ostream & operator << (ostream & out, const Comentarios &c)
 {
 	for (int i=0; i<c.num_comentarios; ++i)
-		cout << c.los_comentarios[i] << endl;
+		out << c.los_comentarios[i] << endl;
 }
 
 //----------------------------------------------------------------------------
