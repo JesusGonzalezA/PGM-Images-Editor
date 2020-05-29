@@ -100,8 +100,8 @@ class Comentarios{
 		/**
 		  * @brief Inserta un comentario en la lista de comentarios
 		  * @param c El comentario a insertar
-		  * @param index Índice donde se insertará el comentario
-		  * @pre (index>=0) && (index<=num_comentarios)
+		  * @param index Índice donde se insertará el comentario.
+		  * @pre (index>0) && (index<=num_comentarios+1)
 		  * @pre `c` debe empezar por `#`
 		  */
 		void Inserta (const string c, const int index);
@@ -110,7 +110,7 @@ class Comentarios{
 		  * @brief Operador `[]`
 		  * @brief Permite el acceso para consulta
 		  * @param index índice del comentario
-		  * @pre (index>=0) && (index<num_comentarios)
+		  * @pre (index>0) && (index<=num_comentarios)
 		  */
 		string operator [] (const int index) const;
 

@@ -107,7 +107,7 @@ int Imagen :: GetCols() const
 
 pixel & Imagen :: ValorPixel (const int fila, const int columna) const
 {
-	return img[fila][columna];
+	return img[fila-1][columna-1];
 }
 
 //----------------------------------------------------------------------------
@@ -293,7 +293,9 @@ Imagen & Imagen :: operator = (const int valor)
 //----------------------------------------------------------------------------
 
 Imagen & Imagen :: operator ! ()
-{}
+{
+
+}
 
 //----------------------------------------------------------------------------
 
@@ -330,8 +332,8 @@ istream & operator >> (istream & in, Imagen &i)
 			//Leo el contenido de la imagen
 			if (tipo == "P2"){
 				int num;
-				for (int z=0; z<f; ++z)
-					for (int j=0; j<c; ++j){
+				for (int z=1; z<=f; ++z)
+					for (int j=1; j<=c; ++j){
 						in >> num;
 						i(z,j) = (pixel) num;
 					}
@@ -350,8 +352,8 @@ istream & operator >> (istream & in, Imagen &i)
 				}
 				//Lectura correcta --> actualizar píxeles
 				else{
-					for (int z=0, contador = 0; z<f; ++z)
-						for (int j = 0; j<c; ++j, contador++)
+					for (int z=1, contador = 0; z<=f; ++z)
+						for (int j = 1; j<=c; ++j, contador++)
 							i(z,j) = image[contador];
 				}
 			}

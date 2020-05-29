@@ -95,6 +95,9 @@ void Comentarios :: Limpiar (void)
 
 void Comentarios :: Inserta (const string c, const int index)
 {
+	//Se cuenta desde el 1
+	int index_ajustado = index-1;
+
 	if (num_comentarios == 0){
 		(*this)+=c;
 	}
@@ -116,18 +119,18 @@ void Comentarios :: Inserta (const string c, const int index)
 			delete[] aux;
 		}
 
-		string * aux = new string [num_comentarios-index];
+		string * aux = new string [num_comentarios-index_ajustado];
 
 		//Copiar los comentarios en el vector auxiliar
-		for (int i=0; i<(num_comentarios-index); ++i)
-			 aux [i] = los_comentarios[index + i];
+		for (int i=0; i<(num_comentarios-index_ajustado); ++i)
+			 aux [i] = los_comentarios[index_ajustado + i];
 
 		//Añado el nuevo comentario
-		los_comentarios[index] = c;
+		los_comentarios[index_ajustado] = c;
 
 		//Volver a poner los comentarios
-		for (int i=1; i<=(num_comentarios-index); ++i)
-			 los_comentarios [index + i] = aux[i-1];
+		for (int i=1; i<=(num_comentarios-index_ajustado); ++i)
+			 los_comentarios [index_ajustado + i] = aux[i-1];
 
 		delete[] aux;
 		num_comentarios++;
@@ -234,7 +237,7 @@ istream & operator >> (istream & in, Comentarios &c)
 
 string Comentarios :: operator [] (const int index) const
 {
-	return los_comentarios[index];
+	return los_comentarios[index-1];
 }
 
 //----------------------------------------------------------------------------

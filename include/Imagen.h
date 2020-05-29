@@ -73,6 +73,18 @@ class Imagen{
 		  */
 		void ReservaEspacio (const int f, const int c);
 
+		/**
+		  * @brief Consultor/Modificador del píxel en la posición
+		  		   `fila x columna`
+		  * @param fila Fila en la que se encuentra el píxel
+		  * @param columna Columna en la que se encuentra el píxel
+		  * @pre (fila>0) && (fila<=fils)
+		  * @pre (columna>0) && (columna<=cols)
+		  * @return Devuelve una referencia al píxel apuntado por
+		  	`fila x columna`
+		  */
+		pixel & ValorPixel (const int fila, const int columna) const;
+
 	public:
 
 		/**
@@ -116,18 +128,6 @@ class Imagen{
 		  * @return `cols`
 		  */
 		int GetCols() const;
-
-		/**
-		  * @brief Consultor/Modificador del píxel en la posición
-		  		   `fila x columna`
-		  * @param fila Fila en la que se encuentra el píxel
-		  * @param columna Columna en la que se encuentra el píxel
-		  * @pre (fila>=0) && (fila<=fils)
-		  * @pre (columna>=0) && (columna<=cols)
-		  * @return Devuelve una referencia al píxel apuntado por
-		  	`fila x columna`
-		  */
-		pixel & ValorPixel (const int fila, const int columna) const;
 
 		/**
 		  * @brief Devuelve el número de comentarios guardados
@@ -176,8 +176,8 @@ class Imagen{
 		  * @brief Operador de acceso
 		  * @param f : fila
 		  * @param c : columna
-		  * @pre `f >= 0` y `f<fils`
-		  * @pre `c >= 0` y `c<cols`
+		  * @pre `f > 0` y `f<=fils`
+		  * @pre `c > 0` y `c<=cols`
 		  * @return Devuelve una copia del valor del pixel indicado
 	 	  */
 		pixel & operator () (const int f, const int c) const;
@@ -186,8 +186,8 @@ class Imagen{
 		  * @brief Operador de acceso
 		  * @param f : fila
 		  * @param c : columna
-		  * @pre `f >= 0` y `f<fils`
-		  * @pre `c >= 0` y `c<cols`
+		  * @pre `f > 0` y `f<=fils`
+		  * @pre `c > 0` y `c<=cols`
 		  * @return Devuelve una referencia al pixel indicado
 	 	  */
 		pixel & operator () (const int f, const int c);
