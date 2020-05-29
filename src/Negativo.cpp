@@ -53,9 +53,11 @@ int main (int argc, char **argv){
 
 	//PROCESAMIENTO
 	else{
+		//Leo la entrada
 		Imagen entrada(argv[1]);
-		Imagen copia(entrada);
-		(!copia).ToP2(nombre_fichero);
+
+		//Escribo la salida procesada
+		(!entrada).ToP2(nombre_fichero);
 	}
 
 	return 0;
