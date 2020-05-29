@@ -124,10 +124,34 @@ class Imagen{
 		int GetFils() const;
 
 		/**
+		  * @brief Consultor para filas
+		  * @return `fils`
+		  */
+		int GetFils();
+
+		/**
 		  * @brief Consultor para columnas
 		  * @return `cols`
 		  */
 		int GetCols() const;
+
+		/**
+		  * @brief Consultor para columnas
+		  * @return `cols`
+		  */
+		int GetCols();
+
+		/**
+		  * @brief Consultor para el valor máximo de luminosidad
+		  * @return `max_luminosidad`
+		  */
+		int GetMaxLuminosidad() const;
+
+		/**
+		  * @brief Consultor para el valor máximo de luminosidad
+		  * @return `max_luminosidad`
+		  */
+		int GetMaxLuminosidad();
 
 		/**
 		  * @brief Devuelve el número de comentarios guardados
@@ -136,12 +160,26 @@ class Imagen{
 		int GetNumComentarios(void) const;
 
 		/**
+		  * @brief Devuelve el número de comentarios guardados
+		  * @return Número de comentarios guardados
+		  */
+		int GetNumComentarios(void);
+
+		/**
 		  * @brief Consulta un comentario dado por un índice
 		  * @param index índice del comentario a consultar
 		  * @return Devuelve el comentario en el índice `index` o un string
 		            vacío si `index < 0  ||  index >= GetNumComentarios()`
 	 	  */
 		string GetComentario (const int index) const;
+
+		/**
+		  * @brief Set de `max_luminosidad`
+		  * @param v Nuevo valor
+		  * @pre `v>=0`
+		  * @post Se cambian los píxeles mayores al nuevo valor a `v`
+		  */
+		void SetMaxLuminosidad (int v);
 
 		/**
 		  * @brief Guarda la imagen como PGM P2 en el fichero de salida

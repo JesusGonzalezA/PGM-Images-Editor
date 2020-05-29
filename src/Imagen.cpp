@@ -59,6 +59,7 @@ Imagen :: Imagen (const int f, const int c, const int valor)
 					  + " a valor " + to_string(valor));
 
 	comentarios += comentario;
+
 }
 
 //----------------------------------------------------------------------------
@@ -107,6 +108,33 @@ int Imagen :: GetCols() const
 
 //----------------------------------------------------------------------------
 
+int Imagen :: GetMaxLuminosidad() const
+{
+	return max_luminosidad;
+}
+
+//----------------------------------------------------------------------------
+
+int Imagen :: GetFils()
+{
+	return fils;
+}
+
+//----------------------------------------------------------------------------
+
+int Imagen :: GetCols()
+{
+	return cols;
+}
+
+//----------------------------------------------------------------------------
+
+int Imagen :: GetMaxLuminosidad() {
+	return max_luminosidad;
+}
+
+//----------------------------------------------------------------------------
+
 pixel & Imagen :: ValorPixel (const int fila, const int columna) const
 {
 	return img[fila-1][columna-1];
@@ -121,9 +149,30 @@ int Imagen :: GetNumComentarios(void) const
 
 //----------------------------------------------------------------------------
 
+int Imagen :: GetNumComentarios(void)
+{
+	return comentarios.GetNumComentarios();
+}
+
+//----------------------------------------------------------------------------
+
 string Imagen :: GetComentario (const int index) const
 {
 	return comentarios[index];
+}
+
+//----------------------------------------------------------------------------
+
+void Imagen :: SetMaxLuminosidad (int v){
+	if (v>=0)
+	{
+		max_luminosidad = v;
+
+		for (int i=1; i<=fils; ++i)
+			for (int j=1; j<=cols; ++j)
+				if ( (*this)(i,j) > v )
+					(*this)(i,j) = v;
+	}
 }
 
 //----------------------------------------------------------------------------

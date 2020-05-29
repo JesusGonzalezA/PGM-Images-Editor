@@ -47,7 +47,7 @@ $(OBJ)/Redimensiona.o : $(SRC)/Redimensiona.cpp \
 				  $(INCLUDE)/Imagen.h $(INCLUDE)/UtilidadesFicheros.h
 	$(CXX) -o $@ -c $< -I$(INCLUDE) $(CXXFLAGS)
 
-$(OBJ)/Binariza.o : $(SRC)/Prueba.cpp \
+$(OBJ)/Binariza.o : $(SRC)/Binariza.cpp \
 				  $(INCLUDE)/Imagen.h $(INCLUDE)/UtilidadesFicheros.h
 	$(CXX) -o $@ -c $< -I$(INCLUDE) $(CXXFLAGS)
 
