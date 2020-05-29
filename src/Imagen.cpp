@@ -342,15 +342,18 @@ istream & operator >> (istream & in, Imagen &i)
 				pixel * image = new pixel [num_pixels];
 				in.read (reinterpret_cast<char*> (image), num_pixels);
 
+				//Fallo  en lectura --> vacía
 				if (in.gcount() != num_pixels) {
 					cerr << "Error: No se pudo leer correctamente la imagen."
 					     << endl;
 					i.LiberaEspacio();
 				}
-
-				for (int z=0, contador = 0; z<f; ++z)
-					for (int j = 0; j<c; ++j, contador++)
-						i(z,j) = image[contador];
+				//Lectura correcta --> actualizar píxeles
+				else{
+					for (int z=0, contador = 0; z<f; ++z)
+						for (int j = 0; j<c; ++j, contador++)
+							i(z,j) = image[contador];
+				}
 			}
 
 		}//Lectura imagen
