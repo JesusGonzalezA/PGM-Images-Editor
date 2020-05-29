@@ -67,10 +67,13 @@ int main (int argc, char **argv){
 
 	//PROCESAMIENTO
 	else{
+		//Leo la imagen de entrada
 		Imagen entrada(argv[1]);
-		Imagen binarizada;
-		binarizada = Binariza (entrada, atoi(argv[2]));
 
+		//Binarizo
+		Imagen binarizada = Binariza (entrada, atoi(argv[2]));
+
+		//Escribo la imagen en la salida
 		(binarizada).ToP2(argv[3]);
 	}
 
