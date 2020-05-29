@@ -6,7 +6,7 @@
 CXX=g++
 CXXFLAGS=
 #------------
-EXE = $(BIN)/Prueba $(BIN)/Redimensiona $(BIN)/Binariza $(BIN)/Negativo
+EXE = $(BIN)/Estimaciones $(BIN)/Redimensiona $(BIN)/Binariza $(BIN)/Negativo
 #------------
 HOMEDIR=.
 SRC=$(HOMEDIR)/src
@@ -26,6 +26,10 @@ DIRECTORIOS= $(SRC) $(INCLUDE) $(OBJ) $(LIB) $(BIN)
 all : $(EXE)
 
 #----------EJECUTABLES----------------
+$(BIN)/Estimaciones : $(OBJ)/Estimaciones.o $(LIB)/libImagen.a \
+					  $(LIB)/libSecuencia.a
+	$(CXX) -o $@ $< -L$(LIB) -lImagen -lSecuencia $(CXXFLAGS)
+
 $(BIN)/Redimensiona : $(OBJ)/Redimensiona.o $(LIB)/libImagen.a
 	$(CXX) -o $@ $< -L$(LIB) -lImagen $(CXXFLAGS)
 
@@ -36,6 +40,10 @@ $(BIN)/Negativo : $(OBJ)/Negativo.o $(LIB)/libImagen.a
 	$(CXX) -o $@ $< -L$(LIB) -lImagen $(CXXFLAGS)
 
 #----------OBJETOS--------------------
+$(OBJ)/Estimaciones.o : $(SRC)/Estimaciones.cpp \
+				  $(INCLUDE)/Imagen.h $(INCLUDE)/UtilidadesFicheros.h
+	$(CXX) -o $@ -c $< -I$(INCLUDE) $(CXXFLAGS)
+
 $(OBJ)/Redimensiona.o : $(SRC)/Redimensiona.cpp \
 				  $(INCLUDE)/Imagen.h $(INCLUDE)/UtilidadesFicheros.h
 	$(CXX) -o $@ -c $< -I$(INCLUDE) $(CXXFLAGS)
@@ -65,6 +73,22 @@ $(OBJ)/UtilidadesFicheros.o : $(SRC)/UtilidadesFicheros.cpp \
 $(LIB)/libImagen.a : $(OBJ)/UtilidadesFicheros.o $(OBJ)/Comentarios.o \
 					$(OBJ)/Imagen.o
 	ar rvs $@ $^
+
+# (Secuencia) ........................
+
+$(OBJ)/Secuencia.o : $(SRC)/Secuencia.cpp \
+                     $(INCLUDE)/Secuencia.h $(INCLUDE)/TipoBase_Secuencia.h
+	@echo
+	@echo Creando objeto: Secuencia.o
+	@echo
+	g++ -c -o $(OBJ)/Secuencia.o  $(SRC)/Secuencia.cpp \
+       -I$(INCLUDE) -std=c++11
+
+$(LIB)/libSecuencia.a : $(OBJ)/Secuencia.o
+	@echo
+	@echo Creando biblioteca: libSecuencia.a
+	@echo
+	ar rvs $(LIB)/libSecuencia.a  $(OBJ)/Secuencia.o
 
 
 
