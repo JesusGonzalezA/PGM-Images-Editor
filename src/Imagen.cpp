@@ -64,11 +64,13 @@ Imagen :: Imagen (const int f, const int c, const int valor)
 //----------------------------------------------------------------------------
 
 Imagen :: Imagen (string nombre_fichero)
+	: Imagen()
 {
 	ifstream fi (nombre_fichero, ios::binary);
 
-	if (!fi)
+	if (!fi){
 		cerr << "Error: No se pudo abrir el fichero " << nombre_fichero << endl;
+	}
 	else
 	{
 		fi >> (*this);
@@ -335,7 +337,7 @@ Imagen Imagen :: operator * (const Imagen & mascara) const
 		string c;
 		while (getline(ioss,c))
 			nueva.comentarios += c;
-			
+
 	}
 
 	return nueva;
