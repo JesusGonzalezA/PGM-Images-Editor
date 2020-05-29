@@ -239,8 +239,6 @@ int main (int argc, char ** argv){
 	// Rellenar cada pixel de la imagen de salida
 
 	double f_orig = 1;
-	ofstream foo;
-	foo.open("datos_salida");
 	for (int f=1; f<=filas_out; f++) {
 
 		int la_fila = (int)f_orig; // fila de la imagen original
@@ -252,13 +250,6 @@ int main (int argc, char ** argv){
 			int la_columna = (int)c_orig; // columna de la imagen original
 
 			image_out(f,c) = entrada(la_fila,la_columna);
-			foo << (int)entrada(la_fila,la_columna) << " ";
-			//int num_pixels_out = filas_out * cols_out;
-			//byte *image_out = new byte[num_pixels_out];
-
-			//byte * image = new byte[num_pixels]; // Reservar espacio para la imagen
-
-			//image_out[(f*cols_out)+c] = image[(la_fila*columnas)+la_columna];
 
 			c_orig += salto_real_cols; // Nueva columna en la imagen original
 
@@ -267,7 +258,6 @@ int main (int argc, char ** argv){
 		f_orig += salto_real_filas; // Nueva fila en la imagen original
 
 	} // for f
-	foo.close();
 
 	/************************************************************************/
 	// Guardar el resultado en un fichero PGM
