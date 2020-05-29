@@ -26,9 +26,6 @@ DIRECTORIOS= $(SRC) $(INCLUDE) $(OBJ) $(LIB) $(BIN)
 all : $(EXE)
 
 #----------EJECUTABLES----------------
-$(BIN)/Prueba : $(OBJ)/Prueba.o $(LIB)/libImagen.a
-	$(CXX) -o $@ $^ -L$(LIB) -lImagen $(CXXFLAGS)
-
 $(BIN)/Redimensiona : $(OBJ)/Redimensiona.o $(LIB)/libImagen.a
 	$(CXX) -o $@ $< -L$(LIB) -lImagen $(CXXFLAGS)
 
@@ -39,10 +36,6 @@ $(BIN)/Negativo : $(OBJ)/Negativo.o $(LIB)/libImagen.a
 	$(CXX) -o $@ $< -L$(LIB) -lImagen $(CXXFLAGS)
 
 #----------OBJETOS--------------------
-$(OBJ)/Prueba.o : $(SRC)/Prueba.cpp \
-				  $(INCLUDE)/Imagen.h $(INCLUDE)/Comentarios.h
-	$(CXX) -o $@ -c $< -I$(INCLUDE) $(CXXFLAGS)
-
 $(OBJ)/Redimensiona.o : $(SRC)/Redimensiona.cpp \
 				  $(INCLUDE)/Imagen.h $(INCLUDE)/UtilidadesFicheros.h
 	$(CXX) -o $@ -c $< -I$(INCLUDE) $(CXXFLAGS)
