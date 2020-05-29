@@ -28,6 +28,12 @@ int main (int argc, char **argv){
 		exit (1);
 	}
 
+	// Comprobar la existencia del fichero de entrada
+	if (!ExisteFichero (argv[1])) {
+		cerr << "Error: " << argv[1] << " no puede abrirse" << endl;
+		exit (2);
+	}
+
 	//Preguntar al usuario si quiere sobreescribir los datos
 	string nombre_fichero = (argc == 2)? argv[1] : argv[2];
 	char respuesta;

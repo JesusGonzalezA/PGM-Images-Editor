@@ -43,6 +43,12 @@ int main (int argc, char **argv){
 		exit (2);
 	}
 
+	// Comprobar la existencia del fichero de entrada
+	if (!ExisteFichero (argv[1])) {
+		cerr << "Error: " << argv[1] << " no puede abrirse" << endl;
+		exit (3);
+	}
+
 	//Preguntar al usuario si quiere sobreescribir los datos
 	char respuesta;
 
