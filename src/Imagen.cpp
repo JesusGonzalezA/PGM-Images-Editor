@@ -177,6 +177,13 @@ void Imagen :: SetMaxLuminosidad (int v){
 
 //----------------------------------------------------------------------------
 
+void Imagen :: AniadeComentario (string c)
+{
+	comentarios += c;
+}
+
+//----------------------------------------------------------------------------
+
 void Imagen :: ToP2 (const string &out)
 {
 	ofstream fo(out);
@@ -189,7 +196,7 @@ void Imagen :: ToP2 (const string &out)
 	//Imprimir cabecera
 	fo << "P2" << endl;
 	fo << comentarios;
-	fo << setw(3) << fils << " " << setw(3) << cols << endl;
+	fo << setw(3) << cols << " " << setw(3) << fils << endl;
 	fo << setw(3) << max_luminosidad << endl;
 
 
@@ -220,7 +227,7 @@ void Imagen :: ToP5 (const string &out)
 	//Imprimir cabecera
 	fo << "P5" << endl;
 	fo << comentarios;
-	fo << setw(3) << fils << " " << setw(3) << cols << endl;
+	fo << setw(3) << cols << " " << setw(3) << fils << endl;
 	fo << setw(3) << max_luminosidad << endl;
 
 
@@ -410,7 +417,7 @@ istream & operator >> (istream & in, Imagen &i)
 		in >> i.comentarios;
 		//Leo las dimensiones de la Imagen
 		int f, c;
-		in >> f >> c;
+		in >> c >> f;
 
 		if (!in.fail() && f>0 && c>0)
 		{

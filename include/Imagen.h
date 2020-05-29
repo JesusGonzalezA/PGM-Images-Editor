@@ -174,6 +174,13 @@ class Imagen{
 		string GetComentario (const int index) const;
 
 		/**
+		  * @brief Añade un comentario a la imagen
+		  * @param c Comentario a añadir
+		  * @pre Debe comenzar por `#`
+		  */
+		void AniadeComentario (string c);
+		
+		/**
 		  * @brief Set de `max_luminosidad`
 		  * @param v Nuevo valor
 		  * @pre `v>=0`
