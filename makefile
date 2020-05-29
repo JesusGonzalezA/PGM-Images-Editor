@@ -6,7 +6,7 @@
 CXX=g++
 CXXFLAGS=
 #------------
-EXE = $(BIN)/Prueba
+EXE = $(BIN)/Prueba $(BIN)/Redimensiona $(BIN)/Binariza $(BIN)/Negativo
 #------------
 HOMEDIR=.
 SRC=$(HOMEDIR)/src
@@ -26,10 +26,35 @@ DIRECTORIOS= $(SRC) $(INCLUDE) $(OBJ) $(LIB) $(BIN)
 all : $(EXE)
 
 #----------EJECUTABLES----------------
-$(BIN)/Prueba : $(SRC)/Prueba.cpp $(OBJ)/Imagen.o $(OBJ)/Comentarios.o
-	$(CXX) -o $@ $^ -I$(INCLUDE) $(CXXFLAGS)
+$(BIN)/Prueba : $(OBJ)/Prueba.o $(LIB)/libImagen.a
+	$(CXX) -o $@ $^ -L$(LIB) -lImagen $(CXXFLAGS)
+
+$(BIN)/Redimensiona : $(OBJ)/Redimensiona.o $(LIB)/libImagen.a
+	$(CXX) -o $@ $< -L$(LIB) -lImagen $(CXXFLAGS)
+
+$(BIN)/Binariza : $(OBJ)/Binariza.o $(LIB)/libImagen.a
+	$(CXX) -o $@ $< -L$(LIB) -lImagen $(CXXFLAGS)
+
+$(BIN)/Negativo : $(OBJ)/Negativo.o $(LIB)/libImagen.a
+	$(CXX) -o $@ $< -L$(LIB) -lImagen $(CXXFLAGS)
 
 #----------OBJETOS--------------------
+$(OBJ)/Prueba.o : $(SRC)/Prueba.cpp \
+				  $(INCLUDE)/Imagen.h $(INCLUDE)/Comentarios.h
+	$(CXX) -o $@ -c $< -I$(INCLUDE) $(CXXFLAGS)
+
+$(OBJ)/Redimensiona.o : $(SRC)/Redimensiona.cpp \
+				  $(INCLUDE)/Imagen.h $(INCLUDE)/UtilidadesFicheros.h
+	$(CXX) -o $@ -c $< -I$(INCLUDE) $(CXXFLAGS)
+
+$(OBJ)/Binariza.o : $(SRC)/Prueba.cpp \
+				  $(INCLUDE)/Imagen.h $(INCLUDE)/UtilidadesFicheros.h
+	$(CXX) -o $@ -c $< -I$(INCLUDE) $(CXXFLAGS)
+
+$(OBJ)/Negativo.o : $(SRC)/Negativo.cpp \
+				  $(INCLUDE)/Imagen.h $(INCLUDE)/UtilidadesFicheros.h
+	$(CXX) -o $@ -c $< -I$(INCLUDE) $(CXXFLAGS)
+
 $(OBJ)/Imagen.o : $(SRC)/Imagen.cpp \
 				  $(INCLUDE)/Imagen.h $(INCLUDE)/Comentarios.h
 	$(CXX) -c -o $@ $< -I$(INCLUDE)
@@ -39,9 +64,16 @@ $(OBJ)/Comentarios.o : $(SRC)/Comentarios.cpp $(INCLUDE)/Comentarios.h
 
 
 #-----------------------OBJ auxiliares
-
+$(OBJ)/UtilidadesFicheros.o : $(SRC)/UtilidadesFicheros.cpp \
+							  $(INCLUDE)/UtilidadesFicheros.h
+	$(CXX) -c -o $@ $< -I$(INCLUDE) $(CXXFLAGS)
 
 #----------BIBLIOTECAS----------------
+$(LIB)/libImagen.a : $(OBJ)/UtilidadesFicheros.o $(OBJ)/Comentarios.o \
+					$(OBJ)/Imagen.o
+	ar rvs $@ $^
+
+
 
 
 #----------LIMPIEZA-------------------
