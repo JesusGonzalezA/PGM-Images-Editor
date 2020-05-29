@@ -294,13 +294,52 @@ Imagen & Imagen :: operator = (const int valor)
 
 Imagen & Imagen :: operator ! ()
 {
+	//Alterar el contenido de la imagen
+	for (int i=0; i<fils; ++i)
+		for (int j=0; j<cols; ++j)
+			img[i][j] = (pixel)(max_luminosidad - (int)img[i][j]);
 
+	//Actualizar los comentarios
+	comentarios += "#Negativo";
+
+	return (*this);
 }
 
 //----------------------------------------------------------------------------
 
-Imagen & Imagen :: operator * (const Imagen & mascara)
-{}
+Imagen Imagen :: operator * (const Imagen & mascara) const
+{
+	Imagen nueva;
+
+	//Si tienen las mismas dimensiones
+	if (mascara.GetCols() == cols && mascara.GetFils() == fils){
+
+		nueva = (*this);
+
+		//Procesar la imagen
+		for (int i=1; i<=fils; ++i)
+			for (int j=1; j<=cols; ++j)
+				nueva(i,j) = ((int)mascara(i,j)==0)? img[i-1][j-1] : 0;
+
+		//Actualizar los comentarios
+		stringstream ioss;
+
+			//Los escribo
+
+		ioss << "#" << setfill('-') << setw(20) << ""<< endl;
+		ioss << mascara.comentarios;
+		ioss << "#" << setfill('-') << setw(20) << ""<< endl;
+		ioss << "# Creada por: ENMASCARAMIENTO" << endl;
+
+			//Los leo y actualizo
+		string c;
+		while (getline(ioss,c))
+			nueva.comentarios += c;
+			
+	}
+
+	return nueva;
+}
 
 //----------------------------------------------------------------------------
 

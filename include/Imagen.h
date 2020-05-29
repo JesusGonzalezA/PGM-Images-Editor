@@ -215,14 +215,15 @@ class Imagen{
 		  * @brief Crea una imagen en la que sólo es visible lo índicado por la
 		  *        máscara
 		  * @param mascara Imagen que actúa como máscara
+		  * @post Se crea una nueva Imagen
 		  * @post Añade una línea formada por guiones a los comentarios y
-		          los comentarios de `mascara`.
+		          los comentarios de `mascara` al objeto creado.
 		  * @post Añade una línea formada por guiones a los comentaros y
-		          el comentario: `Creada por: ENMASCARAMIENTO`
+		          el comentario: `Creada por: ENMASCARAMIENTO` al obj creado
 		  * @post Si no tienen el mismo tamaño se devuelve una imagen vacía
-		  * @return Devuelve una referencia al objeto apuntado por `this`
+		  * @return Devuelve un objeto creado por enmascaramiento
 	 	  */
-		Imagen & operator * (const Imagen & mascara);
+		Imagen operator * (const Imagen & mascara) const;
 
 		/**
 		  * @brief Operador de extracción de flujo
