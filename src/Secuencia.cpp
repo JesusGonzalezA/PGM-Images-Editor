@@ -643,22 +643,24 @@ ostream & operator << (ostream & os, const Secuencia & s)
 {
 	string cadena;
 
-	for (int i=0; i<s.total_utilizados; i++) {
+	for (int i=1; i<=s.total_utilizados; i++) {
 
 		#ifdef INT
-		cadena = cadena + "  " + to_string(s.vector_privado[i]);
+		cadena = cadena + "  " + to_string(s.vector_privado[i-1]);
 		#else
 		#ifdef CHAR
-		cadena = cadena + "  " + s.vector_privado[i];
+		cadena = cadena + "  " + s.vector_privado[i-1];
 		#else
 		#ifdef DOUBLE
-		cadena = cadena + "  " + to_string(s.vector_privado[i]);
+		cadena = cadena + "  " + to_string(s.vector_privado[i-1]);
 		#endif
 		#endif
 		#endif
+
+		if (i%20 == 0) cadena += "\n";
 	}
 
-	os << cadena;
+	os << cadena << endl;
 
 	return os;
 }
