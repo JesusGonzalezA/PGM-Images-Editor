@@ -10,6 +10,7 @@
 #include <string.h>
 
 #include "Comentarios.h"
+#include "Secuencia.h"
 
 using namespace std;
 
@@ -113,6 +114,16 @@ class Imagen{
 		Imagen (string nombre_fichero);
 
 		/**
+		  * @brief Constructor. Crea una imagen a partir de una secuencia que
+		  *  	   contiene los píxeles. Estima las filas y columnas.
+		  * @note  La estimación de `filas` y `columnas` se calcula como la
+		  * 	   combinación que minimiza V(F,C), o la media de las desviacio-
+		  *        nes (al cuadrado) entre cada dos filas consecutivas.
+		  * @param pixeles Secuencia de píxeles
+		  */
+		Imagen (const Secuencia & pixeles);
+
+		/**
 		  * @brief Destructor
 		  */
 		~Imagen ();
@@ -179,7 +190,7 @@ class Imagen{
 		  * @pre Debe comenzar por `#`
 		  */
 		void AniadeComentario (string c);
-		
+
 		/**
 		  * @brief Set de `max_luminosidad`
 		  * @param v Nuevo valor

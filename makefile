@@ -71,7 +71,7 @@ $(OBJ)/UtilidadesFicheros.o : $(SRC)/UtilidadesFicheros.cpp \
 
 #----------BIBLIOTECAS----------------
 $(LIB)/libImagen.a : $(OBJ)/UtilidadesFicheros.o $(OBJ)/Comentarios.o \
-					$(OBJ)/Imagen.o
+					$(OBJ)/Imagen.o $(OBJ)/Secuencia.o
 	ar rvs $@ $^
 
 # (Secuencia) ........................

@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <iomanip>
 #include <string.h>
+#include <limits.h>
+#include <math.h>
 
 #include "Imagen.h"
 
@@ -77,6 +79,82 @@ Imagen :: Imagen (string nombre_fichero)
 		fi >> (*this);
 		comentarios+=("#Creada desde " + nombre_fichero);
 	}
+}
+
+//----------------------------------------------------------------------------
+
+Imagen :: Imagen (const Secuencia & pixeles)
+{
+	int mayor_leido = 0;
+	int tam = pixeles.TotalUtilizados();
+
+	//Encontrar el valor máximo de ilumación
+	for (int i=1; i<=tam; ++i)
+	{
+		if (pixeles[i] > mayor_leido)
+			mayor_leido = pixeles[i];
+	}
+
+	max_luminosidad = mayor_leido;
+
+	//Procesamiento para encontrar las filas y columnas
+		//Variables
+			//Para el procesamiento
+	int filas=0, columnas=0;
+	int it_f = 2, it_c = tam/it_f;
+	double v_min = LONG_MAX;
+
+	//Procesar
+	while (it_c>2){
+
+		//Calcular las filas y columnas de la configuración
+		while ((it_f * it_c) != tam){
+			it_f++;
+			it_c = tam/it_f;
+		}
+
+		//Calcular media de las desviaciones al cuadrado entre dos filas
+		double med_dev = 0;
+
+		for (int i=1, contador=0; i<it_f; ++i){
+
+			int suma_c = 0;
+
+			for (int j=1; j<=it_c; ++j, contador++){
+				suma_c += pow ( (pixeles[(i-1)*it_c + j]
+									-
+							 pixeles[i*it_c + j] )
+							  , 2);
+			}
+
+			med_dev += (( (double)1/it_c) * suma_c);
+		}
+
+		//Calcular el valor V
+		double v = (( (double)1 / (it_f-1) ) * med_dev);
+
+		//Actualizar el mejor V
+		if (v < v_min ){
+			v_min = v;
+			filas = it_f;
+			columnas = it_c;
+		}
+
+		//Siguiente
+		it_f++;
+
+	}//Fin de procesamiento
+
+	//Actualizar filas y columnas
+	ReservaEspacio(filas,columnas);
+
+	//Actualizar pixeles
+	for (int i=0, contador=1; i<fils; ++i)
+		for (int j=0; j<cols; ++j, ++contador)
+			img[i][j] = pixeles[contador];
+
+	//Actualizar comentarios
+	comentarios += "# Creada por: ESTIMACION DE DIMENSIONES";
 }
 
 //----------------------------------------------------------------------------
