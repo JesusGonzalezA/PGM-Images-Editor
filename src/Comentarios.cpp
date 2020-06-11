@@ -149,8 +149,6 @@ Comentarios & Comentarios :: operator = (const Comentarios &otro)
 	//Sólo si son iguales --> evitamos la autoasignación
 	if (this != &otro)
 	{
-		Comentarios aux (otro);
-
 		LiberaEspacio();
 		ReservaEspacio (otro.capacidad);
 
