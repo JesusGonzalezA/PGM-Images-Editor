@@ -94,7 +94,7 @@ $(LIB)/libSecuencia.a : $(OBJ)/Secuencia.o
 
 
 #----------LIMPIEZA-------------------
-mr.proper : clean clean-bins
+mr.proper : clean clean-bins clean-docs
 
 clean: clean-objs clean-libs
 
@@ -107,6 +107,14 @@ clean-objs:
 	@echo ...Borrados objetos
 	@echo
 
+clean-docs:
+
+	@echo Borrando documentacion
+
+	-rm ./doc/html/*
+
+	@echo ...Borrada documentacion
+	@echo
 
 clean-libs:
 	@echo Borrando bibliotecas
@@ -122,6 +130,7 @@ clean-bins :
 	-rm $(BIN)/*
 
 	@echo ...Borrados ejecutables
+	@echo
 
 # ************ Generación de documentación ******************
 docs:
