@@ -10,9 +10,9 @@ make
 * Limpieza: ``make mr.proper``
 * Generación de documentación: ``make docs``
 
-*Para una compilación correcta necesita crear las carpetas vacías: bin lib obj* <br>
-*Para una documentación correcta necesita crear la carpeta doc/html* <br>
-*La documentación se encontrará en ./doc/html/index.html*
+>*Para una compilación correcta necesita crear las carpetas vacías: bin lib obj* <br>
+>*Para una documentación correcta necesita crear la carpeta doc/html* <br>
+>*La documentación se encontrará en ./doc/html/index.html*
 
 ### ./bin/Binariza
 ``./bin/Binariza <Imagen_PGM> <Valor> <nombre_salida> ``
