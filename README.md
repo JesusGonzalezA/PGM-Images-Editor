@@ -36,7 +36,7 @@ Crea una nueva imagen, guardada en *Imagen_PGM_redimensionada*, que será el res
 ### ./bin/Estimaciones
 ``./bin/Estimaciones <fichero_entrada>``
 
-*Fichero_entrada* contiene una lista de rutas a imágenes PGM, cada una en una línea. Estas imágenes tienen la particularidad de que su formato es incompleto: sólo contienen los píxeles de la misma.
+*Fichero_entrada* contiene una lista de rutas a imágenes PGM, cada una en una línea. Estas imágenes tienen la particularidad de que su formato es incompleto: sólo contienen los píxeles de la misma. <br>
 El programa seguirá un algoritmo para encontrar las dimensiones que optimicen la vista de la imagen resultante, llegando a generar imágenes PGM completas.
 
 ## License
