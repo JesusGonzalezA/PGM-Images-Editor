@@ -12,7 +12,7 @@ make
 
 >*Para una compilación correcta necesita crear las carpetas vacías: bin lib obj* <br>
 >*Para una documentación correcta necesita crear la carpeta doc/html* <br>
->*La documentación se encontrará en ./doc/html/index.html*
+>*La documentación se encontrará en doc/html/index.html*
 
 ### ./bin/Binariza
 ``./bin/Binariza <Imagen_PGM> <Valor> <nombre_salida> ``
@@ -28,7 +28,7 @@ Crea la imagen *negativo* de *Imagen_PGM*.
 - Si se usa sólo 1 argumento, la imagen original será sustituida por su negativo. Para recuperarla podemos volver a usar este programa sobre la imagen alterada, pero debemos tener en cuenta que se habrán generado comentarios nuevos.
 
 ### ./bin/Redimensiona
-``./Redimensiona <Imagen_PGM_original> [ <prop> | -f  <filas> | -c <cols> | <filas> <cols> ] <Imagen_PGM_redimensionada>
+``./bin/Redimensiona <Imagen_PGM_original> [ <prop> | -f  <filas> | -c <cols> | <filas> <cols> ] <Imagen_PGM_redimensionada>
 ``
 
 Crea una nueva imagen, guardada en *Imagen_PGM_redimensionada*, que será el resultado de modificar las dimensiones de la imagen *Imagen_PGM_original*. 
