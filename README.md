@@ -1,4 +1,5 @@
 # MP-ProyectoFinal
+[ NOTA ] Puede ver la documentación del proyecto aquí:  https://jesusgonzaleza.github.io/MP-ProyectoFinal/
 Proyecto final para la asignatura Metodología de la Programación en la UGR.
 El proyecto consiste en la representación de una clase *Imagen*, con la que podremos trabajar fácilmente con archivos *PGM*.
 
