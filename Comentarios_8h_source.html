@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Imagen: Fichero Fuente include/Comentarios.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Imagen
+   </div>
+   <div id="projectbrief">Proyecto final - MP</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.13 -->
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',false,false,'search.php','Buscar');
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('Comentarios_8h_source.html','');});
+</script>
+<div id="doc-content">
+<div class="header">
+  <div class="headertitle">
+<div class="title">Comentarios.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="Comentarios_8h.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor"> #ifndef _COMENTARIOS_H_</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor"> #define _COMENTARIOS_H_</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"> #include &lt;iostream&gt;</span></div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; <span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div><div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classComentarios.html">   18</a></span>&#160;<span class="keyword">class </span><a class="code" href="classComentarios.html">Comentarios</a>{</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">private</span>:</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div><div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classComentarios.html#a10e996ff3de319736c891e311a5c8632">   25</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="classComentarios.html#a10e996ff3de319736c891e311a5c8632">num_comentarios</a>;</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div><div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="classComentarios.html#aeb375bf2e3d691d41fc38cc61fe762b2">   31</a></span>&#160;        <span class="keywordtype">int</span> <a class="code" href="classComentarios.html#aeb375bf2e3d691d41fc38cc61fe762b2">capacidad</a>;</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div><div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classComentarios.html#ad511ed4448c642c97e6ef2d3247d0e0b">   37</a></span>&#160;        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">int</span> AUMENTO = 5;</div><div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classComentarios.html#a6c67076bb279efb596b38ce7e405fb2a">   41</a></span>&#160;        <span class="keywordtype">string</span> * <a class="code" href="classComentarios.html#a6c67076bb279efb596b38ce7e405fb2a">los_comentarios</a>;</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordtype">void</span> LiberaEspacio ();</div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordtype">void</span> ReservaEspacio (<span class="keyword">const</span> <span class="keywordtype">int</span> tam);</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">public</span>:</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <a class="code" href="classComentarios.html">Comentarios</a> ();</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <a class="code" href="classComentarios.html">Comentarios</a> (<span class="keyword">const</span> <a class="code" href="classComentarios.html">Comentarios</a> &amp;otro);</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        ~<a class="code" href="classComentarios.html">Comentarios</a> (<span class="keywordtype">void</span>);</div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div><div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordtype">int</span> GetNumComentarios (<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div><div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;</div><div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordtype">void</span> Limpiar (<span class="keywordtype">void</span>);</div><div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div><div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <a class="code" href="classComentarios.html">Comentarios</a> &amp; operator = (<span class="keyword">const</span> <a class="code" href="classComentarios.html">Comentarios</a> &amp;otro);</div><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div><div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <a class="code" href="classComentarios.html">Comentarios</a> &amp; operator += (<span class="keywordtype">string</span> c);</div><div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;</div><div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;        <span class="keywordtype">void</span> Inserta (<span class="keyword">const</span> <span class="keywordtype">string</span> c, <span class="keyword">const</span> <span class="keywordtype">int</span> index);</div><div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div><div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <span class="keywordtype">string</span> operator [] (<span class="keyword">const</span> <span class="keywordtype">int</span> index) <span class="keyword">const</span>;</div><div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div><div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keyword">friend</span> istream &amp; <a class="code" href="Comentarios_8cpp.html#a0827735193ca4eb1e95e1ed9cf69d360">operator &gt;&gt; </a>(istream &amp; in, <a class="code" href="classComentarios.html">Comentarios</a> &amp;c);</div><div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;</div><div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        <span class="keyword">friend</span> ostream &amp; <a class="code" href="Comentarios_8cpp.html#a80f71d45d82d81d2fbbeab69732c0ebf">operator &lt;&lt; </a>(ostream &amp; out, <span class="keyword">const</span> <a class="code" href="classComentarios.html">Comentarios</a> &amp;c);</div><div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;};</div><div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;</div><div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="preprocessor">#endif</span></div><div class="ttc" id="classComentarios_html_a10e996ff3de319736c891e311a5c8632"><div class="ttname"><a href="classComentarios.html#a10e996ff3de319736c891e311a5c8632">Comentarios::num_comentarios</a></div><div class="ttdeci">int num_comentarios</div><div class="ttdef"><b>Definition:</b> <a href="Comentarios_8h_source.html#l00025">Comentarios.h:25</a></div></div>
+<div class="ttc" id="Comentarios_8cpp_html_a80f71d45d82d81d2fbbeab69732c0ebf"><div class="ttname"><a href="Comentarios_8cpp.html#a80f71d45d82d81d2fbbeab69732c0ebf">operator&lt;&lt;</a></div><div class="ttdeci">ostream &amp; operator&lt;&lt;(ostream &amp;out, const Comentarios &amp;c)</div><div class="ttdef"><b>Definition:</b> <a href="Comentarios_8cpp_source.html#l00243">Comentarios.cpp:243</a></div></div>
+<div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div></div>
+<div class="ttc" id="classComentarios_html_a6c67076bb279efb596b38ce7e405fb2a"><div class="ttname"><a href="classComentarios.html#a6c67076bb279efb596b38ce7e405fb2a">Comentarios::los_comentarios</a></div><div class="ttdeci">string * los_comentarios</div><div class="ttdef"><b>Definition:</b> <a href="Comentarios_8h_source.html#l00041">Comentarios.h:41</a></div></div>
+<div class="ttc" id="classComentarios_html"><div class="ttname"><a href="classComentarios.html">Comentarios</a></div><div class="ttdoc">Recoge cada operación relevante realizada sobre una Imagen. </div><div class="ttdef"><b>Definition:</b> <a href="Comentarios_8h_source.html#l00018">Comentarios.h:18</a></div></div>
+<div class="ttc" id="classComentarios_html_aeb375bf2e3d691d41fc38cc61fe762b2"><div class="ttname"><a href="classComentarios.html#aeb375bf2e3d691d41fc38cc61fe762b2">Comentarios::capacidad</a></div><div class="ttdeci">int capacidad</div><div class="ttdoc">Nos permite mantener el control de la estructura. </div><div class="ttdef"><b>Definition:</b> <a href="Comentarios_8h_source.html#l00031">Comentarios.h:31</a></div></div>
+<div class="ttc" id="Comentarios_8cpp_html_a0827735193ca4eb1e95e1ed9cf69d360"><div class="ttname"><a href="Comentarios_8cpp.html#a0827735193ca4eb1e95e1ed9cf69d360">operator&gt;&gt;</a></div><div class="ttdeci">istream &amp; operator&gt;&gt;(istream &amp;in, Comentarios &amp;c)</div><div class="ttdef"><b>Definition:</b> <a href="Comentarios_8cpp_source.html#l00194">Comentarios.cpp:194</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<hr>
+<small>ETS Ingenierías Informática y de Telecomunicación. Universidad de Granada.
+</small>
