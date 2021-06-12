@@ -1,5 +1,5 @@
 # MP-ProyectoFinal
-[ NOTA ] Puede ver la documentación del proyecto aquí:  https://jesusgonzaleza.github.io/MP-ProyectoFinal/
+[ NOTA ] Puede ver la documentación del proyecto aquí:  https://jesusgonzaleza.github.io/PGM-Images-Editor/
 
 
 Proyecto final para la asignatura Metodología de la Programación en la UGR.
